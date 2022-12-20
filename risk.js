@@ -1,4 +1,4 @@
-let combatLog = document.getElementById("combatLog").innerHTML;
+let combatLog = "";
 
 function simulateCasualties (attackers, defenders){
 
@@ -19,6 +19,10 @@ function simulateCasualties (attackers, defenders){
         attackerCasualties += (dice.defender[i] >= dice.attacker[i]);
         defenderCasualties += (dice.defender[i]) < dice.attacker[i];
     }
+
+    combatLog += `Attacker dice: ${dice.attacker}<br>`;
+    combatLog += `Defender dice: ${dice.defender}<br>`;
+    combatLog += `${attackerCasualties} attacker(s) and ${defenderCasualties} defender(s) died<br>`
     
     return [attackerCasualties, defenderCasualties];
 }
@@ -36,14 +40,38 @@ function rollDice(attackers, defenders, dice){
 
 }
 
-function simulateCombat(attackers, defenders){
+function simulateCombat(){
+    let attackers = parseInt(document.getElementById("attackerCount").value);
+    let defenders = parseInt(document.getElementById("defenderCount").value);
 
-    while(attackers > 0 && defenders > 0){
+    let combatResult = "";
+    combatLog = "";
+    let attackerTreshold = 0;
+    const tresholdSelect = document.querySelectorAll('input[name="tresholdSelect"]');
+
+    if (tresholdSelect[1].checked)
+        attackerTreshold = parseInt(document.getElementById("attackerTreshold").value);
+    else if (tresholdSelect[2].checked)
+        attackerTreshold = attackers * parseInt(document.getElementById("attackerPercent").value)/100.0
+
+
+    while(attackers > attackerTreshold && defenders > 0){
         let casualties = simulateCasualties(attackers, defenders);
         attackers -= casualties[0];
         defenders -= casualties[1];
+        combatLog += `${attackers} attacker(s) and ${defenders} defender(s) left.<br><br>`
     }
 
-    return [attackers, defenders];
+    if (defenders == 0)
+        combatResult = `Attacker wins!<br>Attacker was left with ${attackers} armies.`
+    else if (attackers == 0)
+        combatResult = `Defender wins!<br>Defender was left with ${defenders} armies.`
+    else
+        combatResult = `Attack stopped.<br>Attacker has ${attackers} armies left.<br>
+        Defender has ${defenders} armies left.`
+
+    document.getElementById("combatResult").innerHTML = combatResult;
+    document.getElementById("combatLog").innerHTML = combatLog;
+
 }
 
