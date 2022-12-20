@@ -75,3 +75,13 @@ function simulateCombat(){
 
 }
 
+function showLogs(){
+    logVisbility = document.getElementById("logContainer").style.display;
+
+    if (logVisbility == "block")
+        logVisbility = "none";
+    else
+        logVisbility = "block";
+
+    document.getElementById("logContainer").style.display = logVisbility;
+}

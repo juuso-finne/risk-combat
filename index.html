@@ -46,10 +46,16 @@
         <br>
 
         <button type="button" onclick="simulateCombat()">Simulate</button>
+        <button type="button" onclick="showLogs()">Show/hide combat logs</button>
 
     </form>
 
-    <p id="combatLog"></p>
+    <br>
+    
+    <div id="logContainer" style="overflow-y: auto; height:400px; width:max-content; display:none;">
+        <p id="combatLog"></p>
+    </div>
+
     <script src="./risk.js"></script>
 </body>
 </html>
