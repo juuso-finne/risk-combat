@@ -7,6 +7,45 @@
     <title>Risk combat simulator</title>
 </head>
 <body>
+    <h1>Risk combat simulator</h1>
+    <p id="combatResult" style="font-size: 150%;"></p>
+    <form>
+        <label for="attackerCount">Number of attacking armies:</label>
+        <input type="number" id="attackerCount" min="0" max="9999">
+
+        <br>
+
+        <label for="defenderCount">Number of defending armies:</label>
+        <input type="number" id="defenderCount" min="0" max="9999">
+
+        <br>
+        <br>
+
+        Continue attacking until:
+        <br>
+        <label for="allOut"><input name="tresholdSelect" type="radio" value="0" checked>
+            There are no attackers or defenders left.
+        </label>
+        <br>
+
+        <label for="attackerTreshold"><input name="tresholdSelect" type="radio" value="1"></label>
+        <input type="number" id="attackerTreshold" min="0" max="9999">
+        <label for="attackerTreshold"> attckers are left</label>
+
+        <br>
+
+        <label for="attackerPercent"><input name="tresholdSelect"  type="radio" value="b"></label>
+        <input type="number" id="attackerPercent" min="0" max="99">
+        <label for="attackerPercent"> percent of attackers are left</label>
+
+        <br>
+        <br>
+
+        <button type="button">Simulate</button>
+
+    </form>
+    
+    <p id="combatLog"></p>
     <script src="./risk.js"></script>
 </body>
 </html>

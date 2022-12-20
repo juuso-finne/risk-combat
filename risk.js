@@ -1,4 +1,6 @@
-function casualties (attackers, defenders){
+let combatLog = document.getElementById("combatLog").innerHTML;
+
+function simulateCasualties (attackers, defenders){
 
     attackers = Math.min(attackers, 3);
     defenders = Math.min(defenders, 2);
@@ -12,8 +14,6 @@ function casualties (attackers, defenders){
     };
 
     rollDice(attackers, defenders, dice);
-    console.log(dice.attacker);
-    console.log(dice.defender);
 
     for (let i = 0; i < defenders; i++){
         attackerCasualties += (dice.defender[i] >= dice.attacker[i]);
@@ -36,4 +36,14 @@ function rollDice(attackers, defenders, dice){
 
 }
 
-console.log(casualties(12,1));
+function simulateCombat(attackers, defenders){
+
+    while(attackers > 0 && defenders > 0){
+        let casualties = simulateCasualties(attackers, defenders);
+        attackers -= casualties[0];
+        defenders -= casualties[1];
+    }
+
+    return [attackers, defenders];
+}
+
